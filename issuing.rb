@@ -2,6 +2,7 @@ require 'sinatra'
 require 'dotenv/load'
 require 'json'
 require 'intercom'
+require "sinatra/reloader"
 
 def initialize_intercom
 	if @intercom.nil? then
@@ -16,7 +17,7 @@ end
 
 post '/' do 
 	#array to hold the convos
-	@github_convos = {}
+	@github_convos = []
 	#get the user id from the field input
 	@id = params[:id]
 	initialize_intercom
@@ -42,12 +43,21 @@ def get_parts(conversation)
 end
 
 def check_parts_for_string(parts)
-	parts.each do |m|
-		if m.body.include? "https://github"
-			url = m.body.match(/(https?:\/\/github.com\/.+\/.+\/issues\/\d+)/)
-			@github_convos.store(@convo.id, url)
+	parts.each_with_index do |m|
+		if m.body.include? "https://github.com"
+			regex = /(https?:\/\/github.com\/\S*\/\S*\/issues\/1)/
+			@url = regex.match(m.body)
+			convo_id = @convo.id.to_i
+			hashbrowns = { "id" => @convo.id, "url" => @url}
+			@github_convos << hashbrowns
+			puts @github_convos
 		else
 			break
 		end
 	end
 end
+
+#to do
+# * validate the user
+
+

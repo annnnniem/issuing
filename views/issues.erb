@@ -9,10 +9,8 @@
 <div>
 	<p>Github issues they're associated with: </p>
 	<ul>
-		<% @github_convos.each do |convo| %>
-			<ul>
-				<li><%= convo %></li>
-			</ul> 
+				<% @github_convos.each do |m| %>
+					<li><%= m["id"] %> | <a href="<%= m["url"] %>">URL</a></li>
 		<% end %>
 	</ul>
 </div>
