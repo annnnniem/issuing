@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'dotenv/load'
-require 'json'
 require 'intercom'
 require "sinatra/reloader"
 
@@ -16,18 +15,22 @@ get '/' do
 end
 
 post '/' do 
-	#array to hold the convos
-	@github_convos = []
-	#get the user id from the field input
-	@id = params[:id]
-	initialize_intercom
-	list_conversations(@id)
-	@conversations.each do |i|
-		convo = get_conversation(i)
-		parts = get_parts(convo)
-		check_parts_for_string(parts)
+	begin
+		@github_convos = []
+		@id = params[:id]
+		initialize_intercom
+		list_conversations(@id)
+		@conversations.each do |i|
+			convo = get_conversation(i)
+			parts = get_parts(convo)
+			check_parts_for_string(parts)
+		end
+		erb :issues
+	rescue Intercom::ResourceNotFound => @uhoh
+		erb :error
+	rescue Intercom::AuthenticationError => @uhoh
+		erb :error
 	end
-	erb :issues
 end
 
 def list_conversations(id)
@@ -56,8 +59,3 @@ def check_parts_for_string(parts)
 		end
 	end
 end
-
-#to do
-# * validate the user
-
-

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Error</title>
+	<link rel=stylesheet type="text/css" href="style.css">
+	<script src="index.js"></script>
+</head>
+<body>
+	<% if @uhoh %> 
+		<%= @uhoh %>
+		<p>Is <%= @id %> a valid ID? Go back <a href="/">home</a> and try again.</p>
+	<% else %>
+		<% @uhoh2 %>
+	<% end %>
+</body>
+</html>

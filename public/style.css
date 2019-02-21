@@ -1,0 +1,20 @@
+input{
+	border-radius: 2px;
+	padding: 10px;
+	margin: 3px;
+	font-family: arial;
+	background-color: #e5f2fb;
+}
+
+img {
+	width: 25%;
+}
+div {
+	width: 50%;
+	margin: auto;
+	text-align: center;
+}
+
+body {
+	font-family: Arial;
+}
