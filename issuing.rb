@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'dotenv/load'
 require 'intercom'
-require "sinatra/reloader"
 
 def initialize_intercom
 	if @intercom.nil? then
