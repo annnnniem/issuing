@@ -6,7 +6,7 @@ input{
 	background-color: #e5f2fb;
 }
 
-img {
+#octocat {
 	width: 25%;
 }
 div {
@@ -17,4 +17,15 @@ div {
 
 body {
 	font-family: Arial;
+	text-align: center;
+}
+
+ul {
+	list-style: none;
+}
+p {
+	text-align: center;
+}
+li {
+	margin: 3px;
 }

@@ -7,6 +7,7 @@ def initialize_intercom
 	if @intercom.nil? then
 		token = ENV['token']
 		@intercom = Intercom::Client.new(token: token)
+		@app_id = ENV['app_id']
 	end
 end
 
@@ -28,7 +29,7 @@ post '/' do
 		erb :issues
 	rescue Intercom::ResourceNotFound => @uhoh
 		erb :error
-	rescue Intercom::AuthenticationError => @uhoh
+	rescue Intercom::AuthenticationError => @ruhroh
 		erb :error
 	end
 end
